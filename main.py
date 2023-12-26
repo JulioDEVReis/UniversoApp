@@ -5,6 +5,7 @@ from kivymd.uix.screenmanager import MDScreenManager
 from kivy.lang import Builder
 from utils import DBAccess
 from kivy.uix.video import Video
+from kivy.core.window import Window
 
 Builder.load_file('utils/universoapp.kv')
 
@@ -15,6 +16,8 @@ class UniversoApp(MDScreenManager):
 
 class HomeScreen(MDScreen):
     frase_dia = DBAccess.buscar_frase_aleatoria_BD()
+    Window.keyboard_anim_args = {'d': .2, 't': 'in_out_expo'}
+    Window.softinput_mode = "below_target"
     # print(frase_dia[0])
     if frase_dia is None or frase_dia is '':
         frase_dia = ('Você é incrível! Acredite em você mesmo(a)!')
