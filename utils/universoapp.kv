@@ -65,7 +65,7 @@
                         text: 'Deseje ao Universo'
                         halign: 'center'
                         valign: 'middle'
-                        font_size: 30
+                        font_size: 50
                         font_name: 'Poppins-Bold'
                         bold: True
                         # font_style: 'H4'
@@ -77,7 +77,7 @@
                             padding: 12
                             text: str('" '+root.frase_dia[0]+' "')
                             halign: 'center'
-                            font_size: 17
+                            font_size: 30
                             color: 'white'
 
             MDBoxLayout:
@@ -97,7 +97,7 @@
                             font_name: 'Poppins-Regular'
                             text: 'Coloque seu desejo abaixo para enviar ao Universo! \n\n Seja sempre Positivo em seus pensamentos!'
                             color: 'white'
-                            font_size: 17
+                            font_size: 30
                             halign: 'center'
 
                     MDBoxLayout:
@@ -199,7 +199,7 @@
                         text: 'Frases Incríveis'
                         halign: 'center'
                         valign: 'middle'
-                        font_size: 25
+                        font_size: 50
                         font_name: 'Poppins-Bold'
                         bold: True
                         # font_style: 'H4'
@@ -213,7 +213,7 @@
                             # text: 'Frases'
                             text: str(root.frases_do_dia[0]) +'\n\n'+ str(root.frases_do_dia[1]) +'\n\n'+ str(root.frases_do_dia[2])
                             halign: 'center'
-                            font_size: 15
+                            font_size: 30
                             color: 'white'
 
             MDBoxLayout:
@@ -231,7 +231,7 @@
                             font_name: 'Poppins-Regular'
                             text: 'Seja sempre Positivo\nnos seus pensamentos\ne desejos!'
                             color: 'white'
-                            font_size: 15
+                            font_size: 30
                             halign: 'center'
 
 <Desejo>:
@@ -239,7 +239,7 @@
         Color:
             rgba: [1, 1, 1, 1]
         RoundedRectangle:
-            pos: -150, 0
+            pos: -250, 0
             # Usamos a altura com um calculo para evitar que a imagem ficasse esticada
             size: self.width * 2, self.height
             radius: [0, 0, 0, 0]
@@ -267,7 +267,7 @@
                     padding: 10
                     text: 'Voltar para\nInício'
                     color: 'white'
-                    font_size: 15
+                    font_size: 25
                     halign: 'center'
                 MDBoxLayout:
                     size_hint_y: 1.2
@@ -287,7 +287,7 @@
                         text: 'Seu Desejo foi enviado ao Universo!'
                         halign: 'center'
                         valign: 'middle'
-                        font_size: 25
+                        font_size: 50
                         font_name: 'Poppins-Bold'
                         bold: True
                         # font_style: 'H4'
@@ -301,7 +301,7 @@
                             # text: 'Frases'
                             text: app.desejo_usuario
                             halign: 'center'
-                            font_size: 20
+                            font_size: 35
                             color: 'white'
 
             MDBoxLayout:
@@ -319,5 +319,5 @@
                             font_name: 'Poppins-Regular'
                             text: 'Seja sempre Positivo\nnos seus pensamentos\ne desejos!'
                             color: 'white'
-                            font_size: 15
+                            font_size: 30
                             halign: 'center'
