@@ -5,6 +5,8 @@
         name:'frases'
     Desejo:
         name:'desejo'
+    ListaDesejos:
+        name:'lista_desejos'
 
 <HomeScreen>:
     canvas:
@@ -40,15 +42,19 @@
                     on_release: app.root.current = 'home'
                 MDNavigationRailItem:
                     text: 'Home'
-                    icon: 'home-circle-outline'
+                    icon: 'home-circle'
                     on_release: app.root.current = 'home'
                     font_name: 'Poppins-Regular.ttf'
                 MDNavigationRailItem:
                     text: 'Frases'
-                    icon: 'format-quote-open-outline'
+                    icon: 'format-quote-open'
                     on_release: app.root.current = 'frases'
                     font_name: 'Poppins-Regular.ttf'
-
+                MDNavigationRailItem:
+                    text: 'Desejos'
+                    icon: 'star-box-multiple'
+                    on_release: app.root.current = 'lista_desejos'
+                    font_name: 'Poppins-Regular.ttf'
 
         MDBoxLayout:
             orientation: 'vertical'
@@ -65,7 +71,7 @@
                         text: 'Deseje ao Universo'
                         halign: 'center'
                         valign: 'middle'
-                        font_size: 50
+                        font_size: sp(30)
                         font_name: 'Poppins-Bold'
                         bold: True
                         # font_style: 'H4'
@@ -75,9 +81,9 @@
                         radius: 20
                         MDLabel:
                             padding: 12
-                            text: str('" '+root.frase_dia[0]+' "')
+                            text: str(root.frase_dia[0])
                             halign: 'center'
-                            font_size: 30
+                            font_size: sp(17)
                             color: 'white'
 
             MDBoxLayout:
@@ -97,7 +103,7 @@
                             font_name: 'Poppins-Regular'
                             text: 'Coloque seu desejo abaixo para enviar ao Universo! \n\n Seja sempre Positivo em seus pensamentos!'
                             color: 'white'
-                            font_size: 30
+                            font_size: sp(17)
                             halign: 'center'
 
                     MDBoxLayout:
@@ -127,7 +133,8 @@
                             theme_icon_color: 'Custom'
                             icon_color: 'white'
                             pos_hint: {'center_y': .5}
-                            on_release: app.root.current = 'desejo'
+                            on_release: root.gravar_desejos()
+                            # on_release: app.root.current = 'desejo'
 
 <Frases>:
     canvas:
@@ -156,14 +163,14 @@
                     icon: 'refresh'
                     theme_icon_color: 'Custom'
                     icon_color: 'white'
-                    font_size: 30
+                    font_size: sp(20)
                     pos_hint: {'center_x': 0.5, 'center_y': 0.9}
                     on_release: root.update_frases()
                 MDLabel:
                     padding: 10
                     text: 'Mais Frases'
                     color: 'white'
-                    font_size: 15
+                    font_size: sp(18)
                     halign: 'center'
                 MDBoxLayout:
                     size_hint_y: 8
@@ -172,14 +179,14 @@
                     icon: 'home'
                     theme_icon_color: 'Custom'
                     icon_color: 'white'
-                    font_size: 30
+                    font_size: sp(20)
                     pos_hint: {'center_x': 0.5, 'center_y': 0.5}
                     on_release: app.root.current = 'home'
                 MDLabel:
                     padding: 10
                     text: 'Voltar para\nInício'
                     color: 'white'
-                    font_size: 15
+                    font_size: sp(18)
                     halign: 'center'
                 MDBoxLayout:
                     size_hint_y: 1.2
@@ -199,7 +206,7 @@
                         text: 'Frases Incríveis'
                         halign: 'center'
                         valign: 'middle'
-                        font_size: 50
+                        font_size: sp(28)
                         font_name: 'Poppins-Bold'
                         bold: True
                         # font_style: 'H4'
@@ -213,7 +220,7 @@
                             # text: 'Frases'
                             text: str(root.frases_do_dia[0]) +'\n\n'+ str(root.frases_do_dia[1]) +'\n\n'+ str(root.frases_do_dia[2])
                             halign: 'center'
-                            font_size: 30
+                            font_size: sp(18)
                             color: 'white'
 
             MDBoxLayout:
@@ -231,7 +238,7 @@
                             font_name: 'Poppins-Regular'
                             text: 'Seja sempre Positivo\nnos seus pensamentos\ne desejos!'
                             color: 'white'
-                            font_size: 30
+                            font_size: sp(19)
                             halign: 'center'
 
 <Desejo>:
@@ -239,7 +246,110 @@
         Color:
             rgba: [1, 1, 1, 1]
         RoundedRectangle:
-            pos: -250, 0
+            pos: -500, 0
+            # Usamos a altura com um calculo para evitar que a imagem ficasse esticada
+            size: self.width * 2, self.height
+            radius: [0, 0, 0, 0]
+            source: 'assets/images/background.jpg'
+
+    MDBoxLayout:
+        MDBoxLayout:
+            padding: 2
+            size_hint_x: 0.35
+            MDBoxLayout:
+                radius: 20
+                md_bg_color: (0.1529, 0.2627, 0.3765, 1)
+                orientation: 'vertical'
+                MDBoxLayout:
+                    size_hint_y: 1.2
+                MDIconButton:
+                    icon: 'star-box-multiple'
+                    theme_icon_color: 'Custom'
+                    icon_color: 'white'
+                    font_size: sp(20)
+                    pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                    on_release: app.root.current = 'lista_desejos'
+                MDLabel:
+                    padding: 10
+                    text: 'Meus\nDesejos'
+                    color: 'white'
+                    font_size: sp(18)
+                    halign: 'center'
+                MDBoxLayout:
+                    size_hint_y: 8
+                MDIconButton:
+                    padding: 100
+                    icon: 'home'
+                    theme_icon_color: 'Custom'
+                    icon_color: 'white'
+                    font_size: sp(20)
+                    pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                    on_release: app.root.current = 'home'
+                MDLabel:
+                    padding: 10
+                    text: 'Voltar para\nInício'
+                    color: 'white'
+                    font_size: sp(18)
+                    halign: 'center'
+                MDBoxLayout:
+                    size_hint_y: 1.2
+
+        MDBoxLayout:
+            orientation: 'vertical'
+            MDBoxLayout:
+                padding: 10
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    spacing: 2
+                    padding: 10
+                    radius: 20
+                    md_bg_color: (0.1529, 0.2627, 0.3765, 0.6)
+                    MDLabel:
+                        size_hint_y: 0.45
+                        text: 'Seu Desejo foi enviado ao Universo!'
+                        halign: 'center'
+                        valign: 'middle'
+                        font_size: sp(30)
+                        font_name: 'Poppins-Bold'
+                        bold: True
+                        # font_style: 'H4'
+                        color: 'white'
+                    MDBoxLayout
+                        md_bg_color: (0.557, 0.388, 0.522, 0.5)
+                        radius: 20
+                        MDLabel:
+                            id: frases_label
+                            padding: 12
+                            # text: 'Frases'
+                            text: app.desejo_usuario
+                            halign: 'center'
+                            font_size: sp(20)
+                            color: 'white'
+
+            MDBoxLayout:
+                padding: 10
+                size_hint_y: 0.25
+                MDBoxLayout:
+                    padding: 10
+                    radius: 20
+                    md_bg_color: (0.1529, 0.2627, 0.3765, 0.6)
+                    MDBoxLayout:
+                        md_bg_color: (0, 0, 0, 0.4)
+                        radius: 20
+                        MDLabel:
+                            padding: 10
+                            font_name: 'Poppins-Regular'
+                            text: 'Seja sempre Positivo\nnos seus pensamentos\ne desejos!'
+                            color: 'white'
+                            font_size: sp(20)
+                            halign: 'center'
+
+<ListaDesejos>:
+    canvas:
+        Color:
+            rgba: [1, 1, 1, 1]
+        RoundedRectangle:
+            pos: -500, 0
             # Usamos a altura com um calculo para evitar que a imagem ficasse esticada
             size: self.width * 2, self.height
             radius: [0, 0, 0, 0]
@@ -260,14 +370,14 @@
                     icon: 'home'
                     theme_icon_color: 'Custom'
                     icon_color: 'white'
-                    font_size: 30
+                    font_size: sp(20)
                     pos_hint: {'center_x': 0.5, 'center_y': 0.5}
                     on_release: app.root.current = 'home'
                 MDLabel:
                     padding: 10
                     text: 'Voltar para\nInício'
                     color: 'white'
-                    font_size: 25
+                    font_size: sp(18)
                     halign: 'center'
                 MDBoxLayout:
                     size_hint_y: 1.2
@@ -276,33 +386,37 @@
             orientation: 'vertical'
             MDBoxLayout:
                 padding: 10
+                spacing: 2
+                orientation: 'vertical'
                 MDBoxLayout:
                     orientation: 'vertical'
                     spacing: 2
                     padding: 10
                     radius: 20
                     md_bg_color: (0.1529, 0.2627, 0.3765, 0.6)
+                    size_hint_y: 0.30
                     MDLabel:
-                        size_hint_y: 0.45
-                        text: 'Seu Desejo foi enviado ao Universo!'
+                        size_hint_y: 0.15
+                        text: 'Minha lista\nde Desejos:'
                         halign: 'center'
                         valign: 'middle'
-                        font_size: 50
+                        font_size: sp(30)
                         font_name: 'Poppins-Bold'
                         bold: True
                         # font_style: 'H4'
                         color: 'white'
-                    MDBoxLayout
-                        md_bg_color: (0.557, 0.388, 0.522, 0.5)
-                        radius: 20
-                        MDLabel:
-                            id: frases_label
-                            padding: 12
-                            # text: 'Frases'
-                            text: app.desejo_usuario
-                            halign: 'center'
-                            font_size: 35
-                            color: 'white'
+                MDBoxLayout:
+                    md_bg_color: (0.557, 0.388, 0.522, 0.5)
+                    radius: 20
+                    padding: 15
+                    orientation:'vertical'
+                    spacing: 2
+                    MDScrollView:
+                        MDBoxLayout:
+                            id: desejo_box
+                            orientation: 'vertical'
+                            size_hint_y: None
+                            height: self.minimum_height
 
             MDBoxLayout:
                 padding: 10
@@ -317,7 +431,27 @@
                         MDLabel:
                             padding: 10
                             font_name: 'Poppins-Regular'
-                            text: 'Seja sempre Positivo\nnos seus pensamentos\ne desejos!'
+                            text: 'Pense positivamente para alcançar seus Desejos\n\nClique em X para concluir um Desejo!'
                             color: 'white'
-                            font_size: 30
+                            font_size: sp(17)
                             halign: 'center'
+
+<DesejoLista>:
+    #MDBoxLayout:
+    #    md_bg_color: (0.1529, 0.2627, 0.3765, 0.3)
+    #    radius: 20
+    #    spacing: 2
+    size_hint_y: None
+    height: dp(35)
+    MDLabel:
+        id: label_desejo
+        font_size: sp(17)
+        color: 'white'
+
+    MDIconButton:
+        icon: 'alpha-x-box'
+        theme_icon_color: 'Custom'
+        icon_color: 'white'
+        #size_hint_x: None
+        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+        on_release: app.root.get_screen('lista_desejos').remove_desejos(root)

@@ -27,7 +27,7 @@ def buscar_tres_frases_BD():
     return registos[:3]
 
 
-def mostrar_todas_frases_BD():
+"""def mostrar_todas_frases_BD():
     query = 'SELECT frase FROM frase'
     registos = db_consulta(query)
     return registos
@@ -35,4 +35,4 @@ def mostrar_todas_frases_BD():
 
 def add_frase_BD(parametros):
     query = 'INSERT INTO frase VALUES(NULL, ?, ?)'
-    db_consulta(query, parametros)
+    db_consulta(query, parametros)"""
